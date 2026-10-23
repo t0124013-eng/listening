@@ -352,11 +352,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
 .btn.sub{background:var(--desk-2);color:var(--ink)}
 .btn:disabled{opacity:.35;cursor:default}
 .btn:active:not(:disabled){transform:scale(.98)}
-.au-acts{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.sub-tog{padding:5px 11px}
 .again{border:0;border-radius:999px;background:var(--pc,var(--part-a));color:#fff;font:inherit;font-size:.8rem;font-weight:900;padding:8px 16px;cursor:pointer;animation:pop .25s ease-out}
-.subpop{position:absolute;left:14px;right:14px;bottom:96px;z-index:15;display:flex;flex-direction:column;gap:4px;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;box-shadow:0 12px 30px rgba(29,47,69,.22);animation:pop .2s ease-out}
-.sub-on #playScroll{padding-bottom:170px}
 /* カラオケ表示：読み終えた語に蛍光ペン、いま読んでいる語は濃く */
 .sub-sp{font-size:.66rem;font-weight:700;color:var(--ink-soft)}
 .sub-tx{font-family:var(--f-word);font-size:1rem;line-height:1.55}
@@ -533,6 +529,27 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
 .who{margin:0;font-size:.78rem;color:var(--ink-soft)}
 .who button{border:0;background:none;color:var(--part-a);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer;padding:0 0 0 6px}
 
+/* ---------- 字幕：スイッチと、音声パネル内の字幕欄（問題・選択肢には重ならない） ---------- */
+.sw-row{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;border:0;border-top:1px solid var(--line);background:none;padding:10px 0 0;cursor:pointer;color:var(--ink);text-align:left}
+.sw-label{display:flex;flex-direction:column;gap:1px;min-width:0}
+.sw-label b{font-size:.9rem}
+.sw-label small{font-size:.7rem;color:var(--ink-soft)}
+.sw{position:relative;flex:none;width:76px;height:32px;border-radius:999px;background:var(--desk-2);border:1.5px solid var(--line);box-sizing:border-box;transition:background .2s}
+.sw i{position:absolute;top:2px;left:2px;width:36px;height:25px;border-radius:999px;background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.sw span{position:absolute;top:0;bottom:0;width:36px;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:.68rem;font-weight:500}
+.sw-off{right:2px;color:var(--ink-soft)}
+.sw-on{left:2px;color:#fff;opacity:0}
+.sw-row[aria-checked="true"] .sw{background:var(--part-a);border-color:var(--part-a)}
+.sw-row[aria-checked="true"] .sw i{transform:translateX(35px)}
+.sw-row[aria-checked="true"] .sw-on{opacity:1}
+.sw-row[aria-checked="true"] .sw-off{opacity:0}
+.sw-row[aria-checked="true"] .sw-label small{color:var(--part-a);font-weight:700}
+.sw-row:focus-visible .sw{outline:2px solid var(--ink);outline-offset:2px}
+.st-sub{border-top:0;background:var(--desk);border-radius:14px;padding:10px 12px}
+.subbox{grid-column:1/-1;display:flex;flex-direction:column;gap:4px;background:var(--desk);border-radius:12px;padding:10px 12px;min-height:5.4em}
+.subbox .sub-tx{font-size:.95rem}
+.subbox.wait .sub-tx{font-family:var(--f-ja);font-size:.78rem;color:var(--ink-soft)}
+
 </style>
 </head>
 <body>
@@ -609,14 +626,15 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
           <div class="audio" id="pAudio">
             <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
             <div class="au-txt"><b id="auState">準備中</b><small id="auSub"></small><div class="reads" id="auReads"></div></div>
-            <div class="au-acts">
-              <button class="chip-tog sub-tog" id="subTog" type="button" aria-pressed="false">字幕 OFF</button>
-            </div>
             <div class="cd" id="pCd" hidden><span id="pCdBar"></span></div>
+            <button class="sw-row" id="subTog" type="button" role="switch" aria-checked="false">
+              <span class="sw-label"><b>字幕</b><small id="subHint">英文を見ずに聞いています</small></span>
+              <span class="sw" aria-hidden="true"><span class="sw-off">OFF</span><span class="sw-on">ON</span><i></i></span>
+            </button>
+            <div class="subbox" id="subPop" hidden aria-live="polite"><span class="sub-sp" id="subSp"></span><span class="sub-tx" id="subTx"></span></div>
           </div>
           <div id="pQs" class="qbox"></div>
         </div>
-        <div class="subpop" id="subPop" hidden aria-live="polite"><span class="sub-sp" id="subSp"></span><span class="sub-tx" id="subTx"></span></div>
         <div class="play-foot">
           <button class="btn sub" id="playPause" type="button">一時停止</button>
           <button class="btn" id="playNext" type="button" disabled>次へ</button>
@@ -634,6 +652,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset
               <button type="button" class="st-mode" data-m="1" role="radio"><b>1回</b><span>本番モード</span><small>入試と同じ緊張感で。<br>聞き逃しは許されない</small></button>
               <button type="button" class="st-mode" data-m="2" role="radio"><b>2回</b><span>練習モード</span><small>2回目で確かめる。<br>聞き取りに集中できる</small></button>
             </div>
+            <button class="sw-row st-sub" id="stSub" type="button" role="switch" aria-checked="false">
+              <span class="sw-label"><b>字幕</b><small id="stSubHint">OFF：英文を見ずに聞く</small></span>
+              <span class="sw" aria-hidden="true"><span class="sw-off">OFF</span><span class="sw-on">ON</span><i></i></span>
+            </button>
             <p class="st-note">どの問題も、選んだ回数だけ自動で流れます。読み上げの前に選択肢を読む時間があります。イヤホンをつけて、メモを取りながら聞こう。</p>
             <div class="row2"><button class="btn sub" id="stCancel" type="button">やめる</button><button class="btn" id="stGo" type="button">スタート</button></div>
           </div>
@@ -949,7 +971,7 @@ function startSet(set) {
   const p = prog.sets[set.id], i = SETS.indexOf(set);
   $('stEyebrow').textContent = `SET ${i + 1} ・ ${set.theme}`; $('stTitle').textContent = set.title;
   $('stBest').textContent = p ? `${p.count + 1}回目のチャレンジ・ベスト ${p.best}/${p.total}` : 'はじめてのチャレンジ';
-  renderModes(); $('startLayer').hidden = false;
+  renderModes(); renderStSub(); $('startLayer').hidden = false;
 }
 function renderModes() { document.querySelectorAll('.st-mode').forEach(b => b.setAttribute('aria-checked', Number(b.dataset.m) === S.mode)); }
 document.querySelectorAll('.st-mode').forEach(b => b.onclick = () => { S.mode = Number(b.dataset.m); opts.mode = S.mode; store(KEY + '-opts', opts); renderModes(); });
@@ -1021,16 +1043,24 @@ async function beginListen() {
 }
 /* ---------- 字幕 ---------- */
 function renderSub() {
-  const on = !!opts.sub, t = $('subTog'); t.setAttribute('aria-pressed', on); t.textContent = on ? '字幕 ON' : '字幕 OFF';
-  const box = $('subPop'), it = cur(); $('scr-play').classList.toggle('sub-on', on);
-  const show = on && S.phase === 'listen' && !S.paused;
-  box.hidden = !show; if (!show) return;
-  S.subs[S.idx] = true;
-  const [sp, text] = it.lines[S.line] || ['', ''];
-  const key = `${S.idx}-${S.read}-${S.line}`;
-  if (S.subKey !== key) { S.subKey = key; $('subSp').textContent = sp === 'M' ? '男性' : '女性'; $('subTx').innerHTML = kHTML(text); }
+  const on = !!opts.sub;
+  $('subTog').setAttribute('aria-checked', on);
+  $('subHint').textContent = on ? '読んでいる英文をここに表示中' : '英文を見ずに聞いています';
+  const box = $('subPop'), it = cur();
+  box.hidden = !on; if (!on) return;
+  if (S.phase === 'listen' && !S.paused) {
+    S.subs[S.idx] = true; box.classList.remove('wait');
+    const [sp, text] = it.lines[S.line] || ['', ''];
+    const key = `${S.idx}-${S.read}-${S.line}`;
+    if (S.subKey !== key) { S.subKey = key; $('subSp').textContent = sp === 'M' ? '男性' : '女性'; $('subTx').innerHTML = kHTML(text); }
+  } else {
+    S.subKey = ''; box.classList.add('wait'); $('subSp').textContent = '';
+    $('subTx').textContent = S.paused ? '一時停止中' : S.phase === 'answer' ? '読み上げは終わりました。答えを選ぼう' : S.phase === 'between' ? 'もう一度読まれます' : '読み上げが始まると、ここに英文が出ます';
+  }
 }
-$('subTog').onclick = () => { opts.sub = !opts.sub; store(KEY + '-opts', opts); renderSub(); };
+function renderStSub() { const on = !!opts.sub; $('stSub').setAttribute('aria-checked', on); $('stSubHint').textContent = on ? 'ON：読んでいる英文を表示' : 'OFF：英文を見ずに聞く'; }
+$('stSub').onclick = () => { opts.sub = !opts.sub; store(KEY + '-opts', opts); renderStSub(); };
+$('subTog').onclick = () => { opts.sub = !opts.sub; store(KEY + '-opts', opts); renderSub(); if (S && opts.sub && S.phase === 'listen' && $('subTx')) kClear($('subTx')); };
 function startCountdown(sec, onEnd) {
   stopCountdown(); S.cd = { remain: sec, total: sec, onEnd };
   tickCd(); S.cd.int = setInterval(() => { if (S.paused) return; S.cd.remain--; tickCd(); if (S.cd.remain <= 0) { const f = S.cd.onEnd; stopCountdown(); f(); } }, 1000);

@@ -1,6 +1,6 @@
 /* リスニング ラボ service worker
    アプリや sets.js を更新したら VERSION の数字を1つ上げてください（例：v1 → v2）。 */
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CORE = 'listening-lab-core-' + VERSION;
 const FONTS = 'listening-lab-fonts';
 const CORE_FILES = [
