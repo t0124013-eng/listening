@@ -6,6 +6,7 @@
              + Part C（講義・1回読み）設問3つ
    ・lines の話者：'M'＝男性の声、'W'＝女性の声
    ・ans は正解の番号（0＝1番目の選択肢）
+   ・vocab は [語句, 意味, 本文の例文]。例文はカードの裏に表示されます
    ・セットを増やすときは、この配列の最後に同じ形でコピーして書き足す
    ========================================================= */
 window.LISTENING_SETS = [
@@ -104,7 +105,20 @@ window.LISTENING_SETS = [
           ans: 3,
           exp: '最後の文。単独の対策では不十分で、複数を組み合わせ、建物単位ではなく地域全体で計画することが重要。' }] }
   ],
-  vocab: [['phenomenon', '現象'], ['absorb', '吸収する'], ['release', '放出する'], ['water vapor', '水蒸気'], ['ironically', '皮肉なことに'], ['reflect', '反射する'], ['pavement', '舗装（道路）'], ['pedestrian', '歩行者'], ['maintenance', '維持管理'], ['turn ~ away', '〜を（満員で）断る'], ['get ~ off one\'s plate', '〜を片づける'], ['a small price to pay', '小さな代償']]
+  vocab: [
+    ['phenomenon', '現象', 'Today I\'d like to talk about why cities are often warmer than the countryside around them, a phenomenon known as the urban heat island.'],
+    ['absorb', '吸収する', 'First, materials like concrete and asphalt absorb heat during the day and release it slowly after sunset, so the city cannot cool down at night.'],
+    ['release', '放出する', 'First, materials like concrete and asphalt absorb heat during the day and release it slowly after sunset, so the city cannot cool down at night.'],
+    ['water vapor', '水蒸気', 'Plants cool their surroundings by releasing water vapor through their leaves, a process that works much like sweating does for our bodies.'],
+    ['ironically', '皮肉なことに', 'Ironically, the hotter the city becomes, the more people use air conditioners, which makes the problem even worse.'],
+    ['reflect', '反射する', 'Others are painting roofs and roads in light colors that reflect sunlight instead of absorbing it.'],
+    ['pavement', '舗装（道路）', 'In one study, light-colored pavement lowered surface temperatures by more than ten degrees.'],
+    ['pedestrian', '歩行者', 'Reflective surfaces can bounce heat onto nearby buildings and pedestrians, and green roofs require regular maintenance and water.'],
+    ['maintenance', '維持管理', 'Reflective surfaces can bounce heat onto nearby buildings and pedestrians, and green roofs require regular maintenance and water.'],
+    ['turn ~ away', '〜を（満員で）断る', 'Hardly anyone signed up for the workshop at first, but by Friday we had to turn people away.'],
+    ['get ~ off one\'s plate', '〜を片づける', 'The report isn\'t due until next Thursday, but I\'d rather get it off my plate before the exams start on Monday.'],
+    ['a small price to pay', '小さな代償', 'I suppose an early start is a small price to pay.']
+  ]
 },
 
 /* ---------------- Set 2 ---------------- */
@@ -200,7 +214,20 @@ window.LISTENING_SETS = [
           ans: 0,
           exp: '記憶の定着（単語の実験）に加え、近道の発見（数学の実験）にも睡眠が役立つ。脳が休んでいるだけではない点にも注意。' }] }
   ],
-  vocab: [['undermine', '損なう'], ['temporary', '一時的な'], ['transfer', '移す'], ['participant', '参加者'], ['recall', '思い出す'], ['significantly', '著しく'], ['selective', '選択的な'], ['prioritize', '優先する'], ['all-nighter', '徹夜'], ['might as well', '〜したほうがいい'], ['skim', 'ざっと読む'], ['commute', '通学・通勤']]
+  vocab: [
+    ['undermine', '損なう', 'Research on sleep, however, suggests that this habit may actually undermine learning.'],
+    ['temporary', '一時的な', 'When we learn something new, the information is first stored in a part of the brain called the hippocampus, which works like a temporary notebook.'],
+    ['transfer', '移す', 'During deep sleep, the brain replays the day\'s experiences and transfers important information to the cortex, where it can be kept for the long term.'],
+    ['participant', '参加者', 'In one experiment, two groups of participants learned a list of word pairs.'],
+    ['recall', '思い出す', 'The group that had slept recalled significantly more words.'],
+    ['significantly', '著しく', 'The group that had slept recalled significantly more words.'],
+    ['selective', '選択的な', 'This suggests that the sleeping brain is selective.'],
+    ['prioritize', '優先する', 'It seems to prioritize what we consider important.'],
+    ['all-nighter', '徹夜', 'So, if you have an exam tomorrow, a final review followed by a full night\'s sleep may serve you better than an all-nighter.'],
+    ['might as well', '〜したほうがいい', 'The bus is usually packed at this hour, so we might as well walk.'],
+    ['skim', 'ざっと読む', 'Some studies suggest people skim more on screens.'],
+    ['commute', '通学・通勤', 'The commute is forty minutes, though.']
+  ]
 },
 
 /* ---------------- Set 3 ---------------- */
@@ -297,7 +324,20 @@ window.LISTENING_SETS = [
           ans: 2,
           exp: '最後の「not just recordings and dictionaries, but communities that decide to use the language in daily life」。録音や辞書だけでは足りない。' }] }
   ],
-  vocab: [['linguist', '言語学者'], ['endangered', '絶滅の危機にある'], ['a handful of', 'ほんの少しの'], ['indigenous', '先住の・土着の'], ['document', '記録する'], ['generation', '世代'], ['reverse', '逆転させる'], ['revival', '復活'], ['enforce', '（規則を）守らせる'], ['consistent', '統一された'], ['chilly', '肌寒い'], ['sold out', '売り切れの']]
+  vocab: [
+    ['linguist', '言語学者', 'Of the roughly seven thousand languages spoken in the world today, linguists estimate that nearly half are endangered.'],
+    ['endangered', '絶滅の危機にある', 'Of the roughly seven thousand languages spoken in the world today, linguists estimate that nearly half are endangered.'],
+    ['a handful of', 'ほんの少しの', 'Many of them have fewer than a thousand speakers, and some are known by only a handful of elderly people.'],
+    ['indigenous', '先住の・土着の', 'For example, some indigenous languages in the Pacific contain detailed names for fish species and ocean currents that scientists have only recently begun to document.'],
+    ['document', '記録する', 'For example, some indigenous languages in the Pacific contain detailed names for fish species and ocean currents that scientists have only recently begun to document.'],
+    ['generation', '世代', 'Within two or three generations, the original language may no longer be passed on.'],
+    ['reverse', '逆転させる', 'Can this trend be reversed?'],
+    ['revival', '復活', 'These examples show that revival is possible.'],
+    ['enforce', '（規則を）守らせる', 'That might be harder to enforce, though.'],
+    ['consistent', '統一された', 'Let\'s ask him to make the slides look consistent.'],
+    ['chilly', '肌寒い', 'It gets chilly after dark.'],
+    ['sold out', '売り切れの', 'I can\'t believe it\'s already sold out.']
+  ]
 },
 
 /* ---------------- Set 4 ---------------- */
@@ -394,7 +434,20 @@ window.LISTENING_SETS = [
           ans: 0,
           exp: '最後の「nudges should be transparent」。誰がなぜその選択肢を設計したのか、簡単に分かるようにすべき。' }] }
   ],
-  vocab: [['donate', '寄付する・提供する'], ['opt out', '不参加を選ぶ'], ['opt in', '参加を選ぶ'], ['default', '初期設定'], ['incentive', '動機づけ・誘因'], ['enroll', '登録する'], ['participation', '参加'], ['manipulation', '操作・ごまかし'], ['transparent', '透明な・分かりやすい'], ['soaked', 'びしょぬれの'], ['reusable', '再利用できる'], ['evidence', '根拠・証拠']]
+  vocab: [
+    ['donate', '寄付する・提供する', 'In one, about ninety percent of people agree to donate their organs after death.'],
+    ['opt out', '不参加を選ぶ', 'In the first country, people are automatically registered as donors unless they choose to opt out.'],
+    ['opt in', '参加を選ぶ', 'In the second, they must actively opt in.'],
+    ['default', '初期設定', 'Because most people never change the default option, the default largely decides the outcome.'],
+    ['incentive', '動機づけ・誘因', 'Economists call this kind of design a nudge: a change in the way choices are presented that influences behavior without forbidding any option or changing financial incentives.'],
+    ['enroll', '登録する', 'Some companies automatically enroll new employees in retirement savings plans, which has dramatically increased participation.'],
+    ['participation', '参加', 'Some companies automatically enroll new employees in retirement savings plans, which has dramatically increased participation.'],
+    ['manipulation', '操作・ごまかし', 'First, nudges work best when people are not paying attention, which some see as a form of manipulation.'],
+    ['transparent', '透明な・分かりやすい', 'For this reason, many researchers argue that nudges should be transparent.'],
+    ['soaked', 'びしょぬれの', 'The papers on my desk were soaked.'],
+    ['reusable', '再利用できる', 'Visitors could buy a reusable cup for a hundred yen, or bring their own.'],
+    ['evidence', '根拠・証拠', 'If there\'s evidence it works, I\'m willing to give it a try.']
+  ]
 },
 
 /* ---------------- Set 5 ---------------- */
@@ -492,7 +545,20 @@ window.LISTENING_SETS = [
           ans: 0,
           exp: '最後の文。一夜漬け（cramming）より難しく、効率が悪いように感じるので、多くの学生が使わない。' }] }
   ],
-  vocab: [['conduct', '行う'], ['syllable', '音節'], ['portion', '部分'], ['decline', '低下'], ['restore', '元に戻す'], ['durable', '長持ちする'], ['retention', '保持・定着'], ['productive', '生産的な'], ['cramming', '一夜漬け'], ['justify', '正当化する・見合う'], ['extend', '延長する'], ['withdraw', '辞退する']]
+  vocab: [
+    ['conduct', '行う', 'In the eighteen eighties, the German psychologist Hermann Ebbinghaus conducted an unusual experiment on himself.'],
+    ['syllable', '音節', 'He memorized lists of meaningless syllables, and then tested how much he could remember after different periods of time.'],
+    ['portion', '部分', 'A large portion of the material was lost within the first day, after which the decline slowed down.'],
+    ['decline', '低下', 'A large portion of the material was lost within the first day, after which the decline slowed down.'],
+    ['restore', '元に戻す', 'In other words, reviewing does not simply restore memory.'],
+    ['durable', '長持ちする', 'It makes memory more durable.'],
+    ['retention', '保持・定着', 'If you have, say, sixty minutes to study a set of vocabulary, spreading that time over three separate days produces far better long-term retention than spending all sixty minutes in one session.'],
+    ['productive', '生産的な', 'Simply rereading notes feels productive, but it is a relatively weak way to learn.'],
+    ['cramming', '一夜漬け', 'The irony is that this approach often feels harder and less efficient than cramming, which is precisely why many students do not use it.'],
+    ['be worth ~', '〜の価値がある', 'It just wasn\'t worth the two-hour wait to get in.'],
+    ['extend', '延長する', 'Since the library extended its hours, I\'ve been studying there instead of at the cafe.'],
+    ['embarrassing', '恥ずかしい', 'But I\'d have to talk about some embarrassing moments.']
+  ]
 }
 
 ];

@@ -4,36 +4,38 @@
     <div class="statusbar" aria-hidden="true"><span id="sbTime">9:41</span><span class="sb-icons"><span class="sig"><i style="height:4px"></i><i style="height:6px"></i><i style="height:8px"></i><i style="height:11px"></i></span><span class="bat"></span></span></div>
     <div class="screens">
 
+      <!-- 表紙 -->
+      <section class="screen cover" id="scr-home">
+        <div class="cv-head">
+          <h1 class="cv-title">リスニング ラボ</h1>
+          <p class="cv-copy">1日10分で、<br>入試本番の耳をつくる。</p>
+        </div>
+        <div class="cv-fig"><div class="cv-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><img src="img/mic.png" alt=""></div>
+        <div class="cv-foot">
+          <div class="cv-tags"><span>共通テスト</span><span>難関国公立 二次</span><span>1セット 約10分</span></div>
+          <div class="cv-streak" id="cvStreak"></div>
+          <button class="cv-start" id="cvStart" type="button">はじめる</button>
+        </div>
+      </section>
+
       <!-- TOP -->
-      <section class="screen" id="scr-top">
+      <section class="screen" id="scr-top" hidden>
         <div class="scroll top-scroll">
           <header class="topbar">
-            <div class="brand"><span class="eyebrow">Listening Lab</span><h1 class="apptitle">リスニング ラボ</h1></div>
-            <div class="pills">
-              <span class="pill fire"><svg viewBox="0 0 16 20" aria-hidden="true"><path d="M8 1c.6 3-2.6 4.6-2.6 8 0 1.4.8 2.4 1.6 2.6C6.5 10 8 8.6 9.2 7.4c1 2 3.8 3.6 3.8 6.6A5 5 0 0 1 3 14c0-5 5-7 5-13z" fill="var(--fruit)"/></svg><b id="streakN">0</b><span>日連続</span></span>
-              <span class="pill"><b id="todayN">0</b><span>セット 今日</span></span>
-            </div>
+            <div class="brand"><h1 class="apptitle">リスニング ラボ</h1></div>
           </header>
 
-          <div class="scene" id="scene" data-tod="day">
-            <div class="sky-deco" aria-hidden="true"><span class="sun"></span><span class="cloud c1"></span><span class="cloud c2"></span><span class="stars"></span></div>
-            <div class="scene-top">
-              <div class="scene-title">
-                <div class="g-stage"><span class="g-lv" id="gLv">Lv.1</span><span id="gName">種</span></div>
-                <div class="g-top"><span class="health h0" id="gHealth">元気</span></div>
-              </div>
-            </div>
-            <button class="tree-btn" id="treeBtn" type="button" aria-label="学びの木"><span class="plant hero" id="plant" aria-hidden="true"></span></button>
-            <div class="scene-foot">
-              <div class="g-bar"><span id="gBar"></span></div>
-              <div class="g-next" id="gNext"></div>
-            </div>
+          <div class="stats" aria-label="これまでの記録">
+            <div class="stat"><span>連続</span><b id="stStreak">0</b><small>日</small></div>
+            <div class="stat"><span>今日</span><b id="stToday">0</b><small>セット</small></div>
+            <div class="stat"><span>解いたセット</span><b id="stDone">0</b><small id="stDoneOf">/ 5</small></div>
+            <div class="stat"><span>正答率</span><b id="stRate">—</b><small id="stRateU">%</small></div>
           </div>
 
           <div class="today-card">
             <div class="tc-head">
               <div><div class="tc-eyebrow" id="tcEyebrow">NEXT SET</div><h2 class="tc-title" id="tcTitle">—</h2></div>
-              <span class="tc-min">約10分・各最大2回</span>
+              <span class="tc-min">約10分・1回か2回を選べる</span>
             </div>
             <div class="tc-parts">
               <span><b>Part A</b>短い発話<br>3問</span>
@@ -51,11 +53,6 @@
             <button class="tool" id="toSettings" type="button"><b>読む速さ</b><small id="setSum">標準</small></button>
           </div>
 
-          <button class="report" id="reportTop" type="button" hidden>
-            <span class="report-fig"><img src="img/tablet.png" alt=""></span>
-            <span class="report-txt"><strong>今日の記録を先生に報告</strong><small id="reportTopSub">セットを終えたら送れます</small></span>
-            <span class="arrow" aria-hidden="true">›</span>
-          </button>
           <p class="foot-note">音声は端末の読み上げ機能を使います。イヤホンをつけて取り組もう。</p>
         </div>
       </section>
@@ -76,7 +73,6 @@
             <div class="au-txt"><b id="auState">準備中</b><small id="auSub"></small><div class="reads" id="auReads"></div></div>
             <div class="au-acts">
               <button class="chip-tog sub-tog" id="subTog" type="button" aria-pressed="false">字幕 OFF</button>
-              <button class="again" id="auAgain" type="button" hidden>もう1回聞く</button>
             </div>
             <div class="cd" id="pCd" hidden><span id="pCdBar"></span></div>
           </div>
@@ -87,11 +83,24 @@
           <button class="btn sub" id="playPause" type="button">一時停止</button>
           <button class="btn" id="playNext" type="button" disabled>次へ</button>
         </div>
-        <div class="paused" id="pausedLayer" hidden>
-          <b>一時停止中</b>
-          <small>再開すると、いま読んでいた文の<br>はじめから読み直します。</small>
-          <button class="btn" id="playResume" type="button" style="min-width:200px">再開する</button>
+        <div class="paused" id="pausedLayer" hidden role="status">
+          <b>一時停止中</b><small>問題と選択肢は見られます。再開すると、読んでいた文のはじめから読み直します。</small>
         </div>
+        <!-- スタート画面（聞く回数を選ぶ） -->
+        <div class="start-layer" id="startLayer" hidden>
+          <div class="st-card">
+            <div class="st-head"><span class="st-eyebrow" id="stEyebrow">SET 1</span><h2 id="stTitle">—</h2><small id="stBest"></small></div>
+            <div class="st-parts"><span><b>Part A</b>短い発話 3問</span><span><b>Part B</b>対話 2問</span><span><b>Part C</b>講義 設問3つ</span></div>
+            <div class="st-q">何回聞きますか？</div>
+            <div class="st-modes" role="radiogroup" aria-label="聞く回数">
+              <button type="button" class="st-mode" data-m="1" role="radio"><b>1回</b><span>本番モード</span><small>入試と同じ緊張感で。<br>聞き逃しは許されない</small></button>
+              <button type="button" class="st-mode" data-m="2" role="radio"><b>2回</b><span>練習モード</span><small>2回目で確かめる。<br>聞き取りに集中できる</small></button>
+            </div>
+            <p class="st-note">どの問題も、選んだ回数だけ自動で流れます。読み上げの前に選択肢を読む時間があります。イヤホンをつけて、メモを取りながら聞こう。</p>
+            <div class="row2"><button class="btn sub" id="stCancel" type="button">やめる</button><button class="btn" id="stGo" type="button">スタート</button></div>
+          </div>
+        </div>
+
       </section>
 
       <!-- RESULT -->
@@ -104,11 +113,7 @@
           <div class="res-meta"><span>かかった時間 <b id="resTime">0:00</b></span><span>このセット <b id="resCount">1</b>回目</span></div>
           <div class="res-meta" style="margin-top:-8px"><span id="resAid"></span></div>
           <div class="res-acts">
-            <button class="report" id="reportRes" type="button" hidden>
-              <span class="report-fig"><img src="img/tablet.png" alt=""></span>
-              <span class="report-txt"><strong>先生に報告する</strong><small id="reportResSub">このセットの結果を送ります</small></span>
-              <span class="arrow" aria-hidden="true">›</span>
-            </button>
+            <p class="send" id="resSend" hidden aria-live="polite"></p>
             <button class="btn" id="toReview" type="button">ふりかえる（スクリプト・解説）</button>
             <button class="btn sub" id="resHome" type="button">ホームへ</button>
           </div>
@@ -117,18 +122,12 @@
 
       <!-- REVIEW -->
       <section class="screen" id="scr-review" hidden>
-        <div class="navbar"><button class="navbtn" id="rvBack" type="button">‹ もどる</button><span class="navtitle" id="rvTitle">ふりかえり</span><span style="width:60px"></span></div>
-        <div class="scroll" id="rvScroll">
-          <div class="rv-top">
-            <button class="chip-tog" id="rvHide" type="button" aria-pressed="false">英文をかくす</button>
-            <span class="hint">▶ その文だけ再生 ／ ＋ ふくしゅうカードに入れる</span>
-          </div>
-          <div id="rvList" style="display:flex;flex-direction:column;gap:12px"></div>
-          <div class="rv-item" style="--pc:var(--ink-soft)">
-            <div class="rv-head"><b>このセットの重要語句</b></div>
-            <div class="vocab" id="rvVocab"></div>
-          </div>
-          <button class="btn" id="rvDone" type="button">ふりかえり完了</button>
+        <div class="navbar"><button class="navbtn" id="rvBack" type="button">‹ 結果</button><span class="navtitle" id="rvTitle">ふりかえり</span><span style="width:60px"></span></div>
+        <div class="rv-tabs" id="rvTabs" role="tablist" aria-label="ふりかえる問題を選ぶ"></div>
+        <div class="scroll" id="rvScroll"><div id="rvPage" class="rv-page"></div></div>
+        <div class="play-foot">
+          <button class="btn sub" id="rvPrev" type="button">‹ 前へ</button>
+          <button class="btn" id="rvNext" type="button">次へ ›</button>
         </div>
       </section>
 
@@ -158,6 +157,7 @@
           </div>
         </div>
         <p class="warn" id="voiceWarn" hidden></p>
+        <p class="who" id="setWho" hidden></p>
         <p class="note">声は端末に入っている標準的な英語（アメリカ英語）の男性・女性の声を自動で使います。</p>
         <div class="row2"><button class="btn sub" id="vTest" type="button">試しに聞く</button><button class="btn" id="setClose" type="button">閉じる</button></div>
       </div>
@@ -168,7 +168,7 @@
       <div class="sheet" role="dialog" aria-labelledby="pfTitle">
         <div class="sheet-grip"></div>
         <h2 class="sheet-title" id="pfTitle">あなたの名前を登録</h2>
-        <p class="note">先生への報告に使います。最初に1回だけ入力すれば、次からは入力しなくてOKです。</p>
+        <p class="note">セットを終えるたびに、結果が自動で先生に届きます。最初に1回だけ入力すれば、次からは入力しなくてOKです。</p>
         <div class="row2">
           <label class="field">クラス<input id="pfClass" autocomplete="off" placeholder="例：1S"></label>
           <label class="field">出席番号<input id="pfNo" inputmode="numeric" autocomplete="off" placeholder="例：12"></label>

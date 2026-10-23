@@ -1,7 +1,7 @@
 import pathlib,re
 B=pathlib.Path(__file__).parent; R=B.parent
 css=(B/'base.css').read_text()+'\n'+(B/'app.css').read_text()
-js=(B/'app.js').read_text().replace('/*PLANT_SVG*/',(B/'plant.js').read_text())
+js=(B/'app.js').read_text()
 html=(B/'app.html').read_text()
 head='''<!doctype html>
 <html lang="ja">
